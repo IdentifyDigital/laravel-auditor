@@ -1,0 +1,20 @@
+{
+    "name": "identifydigital/auditor",
+    "description": "Auditing Pluging for Laravel",
+    "minimum-stability": "dev",
+	"extra": {
+		"laravel": {
+			"providers": [
+				"IdentifyDigital\\Auditor\\AuditorServiceProvider"
+			],
+			"aliases": {
+				"Auditor": "IdentifyDigital\\Auditor\\Facades\\AuditorFacade"
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"IdentifyDigital\\Auditor\\": "src/"
+		}
+	}
+}
