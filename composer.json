@@ -1,6 +1,6 @@
 {
-    "name": "identifydigital/auditor",
-    "description": "Auditing Pluging for Laravel",
+    "name": "identifydigital/laravel-auditor",
+    "description": "Auditing Plugin for Laravel",
     "minimum-stability": "dev",
 	"extra": {
 		"laravel": {
