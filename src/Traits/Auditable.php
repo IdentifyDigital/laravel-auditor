@@ -1,35 +1,41 @@
-<?PHP
+<?php
 
 namespace IdentifyDigital\Auditor\Traits;
 
 use IdentifyDigital\Auditor\Models\AuditLog;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 trait Auditable
 {
-	/**
-	 * Add an audit log to the current model /
-	 *
-	 * @param String $message 	[ The message associated with this audit log ]
-	 * @return Auditable		[ The object being audited ]
-	 */
-	public function audit(String $message)
+    /**
+     * Attaches a new audit to the current Model.
+     *
+     * @param $message
+     * @param array|null $changes
+     * @param Authenticatable $user
+     * @return Model|AuditLog
+     */
+	public function audit($message, array $changes = null, Authenticatable $user = null)
 	{
-		AuditLog::create([
-			'message' 		=> $message,
-			'relation' 		=> self::class,
-			'relation_id' 	=> $this->id
-		]);
-		return $this; 
+	    return $this->audits()->create([
+	        'message' => $message,
+            'changes' => $changes,
+            'relation' => self::class,
+            'auth' => get_class($user),
+            'auth_id' => $user->getKey()
+        ]);
 	}
-	
+
 	/**
-	 * Returns a collection of audit logs associated with the current model
+	 * Returns a collection of audit logs belonging to this model.
 	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 * @return BelongsToMany
 	 */
 	public function audits()
 	{
-		return $this->belongsToMany(AuditLog::class, 'audit_logs', 'relation_id')
-						->where('relation', self::class);
+		return $this->hasMany(AuditLog::class, 'relation_id')
+            ->where('relation', self::class);
 	}
 }
