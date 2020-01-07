@@ -23,8 +23,8 @@ trait Auditable
 	        'message' => $message,
             'changes' => $changes,
             'relation' => self::class,
-            'auth' => get_class($user),
-            'auth_id' => $user->getKey()
+            'auth' => $user instanceof Authenticatable ? get_class($user) : null,
+            'auth_id' => $user instanceof Authenticatable ? $user->getKey() : null
         ]);
 	}
 
