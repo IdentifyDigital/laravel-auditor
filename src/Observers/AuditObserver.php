@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace IdentifyDigital\Auditor\Observers;
 
 use IdentifyDigital\Auditor\Facades\Auditor;
 use Illuminate\Auth\Authenticatable;
