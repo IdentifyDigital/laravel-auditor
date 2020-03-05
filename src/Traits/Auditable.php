@@ -36,6 +36,7 @@ trait Auditable
 	public function audits()
 	{
 		return $this->hasMany(AuditLog::class, 'relation_id')
-            ->where('relation', self::class);
+            ->where('relation', self::class)
+            ->orderByDesc('created_at');
 	}
 }
