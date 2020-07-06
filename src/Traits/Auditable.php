@@ -15,12 +15,14 @@ trait Auditable
      * @param $message
      * @param array|null $changes
      * @param Authenticatable $user
+     * @param string $icon
      * @return Model|AuditLog
      */
-	public function audit($message, array $changes = null, Authenticatable $user = null)
+	public function audit($message, array $changes = null, Authenticatable $user = null, $icon = null)
 	{
 	    return $this->audits()->create([
 	        'message' => $message,
+            'icon' => $icon,
             'changes' => $changes,
             'relation' => self::class,
             'auth' => $user instanceof Authenticatable ? get_class($user) : null,

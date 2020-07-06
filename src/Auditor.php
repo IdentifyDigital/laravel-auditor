@@ -16,14 +16,15 @@ class Auditor
      * @param $message
      * @param array $changes
      * @param Authenticatable|null $user
+     * @param string $icon
      * @throws ModelNotAuditable
      */
-    public function audit(Model $model, $message, array $changes = [], Authenticatable $user = null)
+    public function audit(Model $model, $message, array $changes = [], Authenticatable $user = null, $icon = null)
     {
         if(!method_exists($model, 'audit'))
             throw new ModelNotAuditable("Model does not use Auditable Trait");
 
         //Attach the audit to the $model here
-        $model->audit($message, $changes, $user);
+        $model->audit($message, $changes, $user, $icon);
     }
 }

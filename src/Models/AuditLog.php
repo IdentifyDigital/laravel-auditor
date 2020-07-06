@@ -15,7 +15,7 @@ class AuditLog extends Model
      *
      * @var array
      */
-	protected $fillable = ['message', 'changes', 'relation', 'relation_id', 'auth', 'auth_id'];
+	protected $fillable = ['message', 'icon', 'changes', 'relation', 'relation_id', 'auth', 'auth_id'];
 
     /**
      * The attributes that should be cast to native types.
